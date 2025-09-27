@@ -58,7 +58,13 @@ Helsinki
 The state of the map created above looks like this. Each key refers to some value.
 
 <!-- <img src="../img/drawings/hashmap.png" alt="Hashmapissa avaimen perusteella saadaan selville arvo."/> -->
-<img src="img/part8.2-hashmap.png" alt="A value in a hashmap is looked up based on a key." />
+
+| Key | Value |
+|-----|-------|
+| "00710" | "Helsinki" |
+| "90014" | "Oulu" |
+| "33720" | "Tampere" |
+| "33014" | "Tampere" |
 
 <!-- Mikäli hajautustaulussa ei ole haettavaa avainta, palauttaa hajautustaulun metodi `get` `null`-viitteen. -->
 If a map does not contained the key used for the search, its `get` method returns a `null` reference.
@@ -351,8 +357,7 @@ Tarkastellaan edellä esitettyä kirjastoesimerkkiä. Koko ohjelman olisi aivan 
 
 Alla olevassa esimerkissä kirjat on tallennettu listaan ja niiden etsiminen tapahtuu listaa läpikäyden. -->
 
-The hash map is implemented internally in such a way that searching by a key is very fast. The hash map generates a "hash value" from the key, i.e. a piece of code, which is used to store the value of a specific location. When a key is used to retrieve information from a hash map, this particular code identifies the location where the value associated with the key is. In practice, it's not necessary to go through all the key-value pairs in the hash map when searching for a key; the set that's checked is significantly smaller. We'll be taking a deeper look into the implementation of a hash map in COMP 128, and compare it to other implementations of the Map interface.
-
+The hash map is implemented internally in such a way that searching by a key is very fast. The hash map generates a "hash value" from the key, i.e. a piece of code which is used to store the value of a specific location. When a key is used to retrieve information from a hash map, this particular code identifies the location of the value associated with the key. In practice, it's not necessary to go through all the key-value pairs in the hash map when searching for a key; the set that's checked is significantly smaller. We'll be taking a deeper look into the implementation of a hash map in COMP 128, and compare it to other implementations of the Map interface.
 
 Consider the library example that was introduced above. The whole program could just as well have been implemented using a list. In that case, the books would be placed on the list instead of the directory, and the book search would happen by iterating over the list.
 
@@ -898,7 +903,7 @@ In the above example, we adhered to the DRY (Don't Repeat Yourself) principle ac
 *Programming exercise:*
 
 <!-- Luo lyhenteiden ylläpitoon käytettävä luokka `Abbreviations`. Luokalla tulee olla parametriton konstruktori, ja sen tulee tarjota seuraavat metodit: -->
-Create a class `Abbreviations` for managing common abbreviations. The class must have a constructor, which does not take any parameters. The class must also provide the following methods:
+Create a class `Abbreviations` for managing common abbreviations. The class must have a constructor which does not take any parameters. The class must also provide the following methods:
 
 - `public void addAbbreviation(String abbreviation, String explanation)` adds a new abbreviation and its explanation.
 - `public boolean hasAbbreviation(String abbreviation)` checks if an abbreviation has already been added; returns `true` if it has and `false` if it has not.
@@ -1009,8 +1014,8 @@ Exercise template contains a class `Program`. Implement the following class meth
 
 <!-- - `public static void tulostaArvotJosAvaimessa(HashMap<String, String> hajautustaulu, String merkkijono)`, joka tulostaa parametrina annetun hajautustaulun ne arvot, joihin liittyvät avaimet sisältävät parametrina annetun merkkijonon. -->
  -  `public static void printKeys(HashMap<String,String> hashmap)`, prints all the keys in the hashmap given as a parameter.
- -  `public static void printKeysWhere(HashMap<String,String> hashmap, String text)` prints the keys in the hashmap given as a parameter, which contain the string given as a parameter.
- - `public static void printValuesOfKeysWhere(HashMap<String,String> hashmap, String text)`, prints the values in the given hashmap whichs keys contain the given string.
+ -  `public static void printKeysWhere(HashMap<String,String> hashmap, String text)` prints the keys in the hashmap given as a parameter which contain the string given as a parameter.
+ - `public static void printValuesOfKeysWhere(HashMap<String,String> hashmap, String text)`, prints the values in the given hashmap whose keys contain the given string.
 
 <!-- Esimerkki luokkametodien käytöstä: -->
 Example of using the class methods:
@@ -1189,29 +1194,13 @@ A map's key and the object to be stored are always reference-type variables. If 
     <td><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Character.html" target="_blank" rel="noopener">Character</a></td>
   </tr>
 </table> -->
-<table class="table">
 
-  <tr>
-    <th>Primitive</th>
-    <th>Reference-type Equivalent</th>
-  </tr>
+| Primitive | Reference-type equivalent |
+|-----------|---------------------------|
+| int       | [Integer](http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html) |
+| double    | [Double](http://docs.oracle.com/javase/8/docs/api/java/lang/Double.html) |
+| char      | [Character](http://docs.oracle.com/javase/8/docs/api/java/lang/Character.html) |
 
-  <tr>
-    <td>int</td>
-    <td><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html" target="_blank" rel="noopener">Integer</a>
-    </td>
-  </tr>
-
-  <tr>
-    <td>double</td>
-    <td><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Double.html" target="_blank" rel="noopener">Double</a></td>
-  </tr>
-
-  <tr>
-    <td>char</td>
-    <td><a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Character.html" target="_blank" rel="noopener">Character</a></td>
-  </tr>
-</table>
 
 <!-- Java muuntaa alkeistyyppiset muuttujat automaattisesti viittaustyyppisiksi kun niitä lisätään HashMapiin tai ArrayListiin. Tätä automaattista muunnosta viittaustyyppisiksi kutsutaan Javassa *auto-boxingiksi*, eli automaattiseksi "laatikkoon" asettamiseksi. Automaattinen muunnos onnistuu myös toiseen suuntaan. -->
 
@@ -1294,7 +1283,7 @@ Kun teemme automaattista muunnosta, tulee varmistaa että muunnettava arvo ei ol
 
 There is, however, some risk in type conversions. If we attempt to convert a `null` reference - a sighting not in HashMap, for instance - to an integer, we witness a *java.lang.reflect.InvocationTargetException* error. Such an error may occur in the `timesSighted` method in the example above - if the `allSightings` map does not contain the value being searched, it returns a `null` reference and the conversion to an integer fails.
 
-When performing automatic conversion, we should ensure that the value to be converted is not null. For example, the `timesSighted` method in the program program should be fixed in the following way. ->
+When performing automatic conversion, we should ensure that the value to be converted is not null. For example, the `timesSighted` method in the program should be fixed in the following way. ->
 
 
 <!-- ```java
@@ -1333,7 +1322,7 @@ public int timesSighted(String sighted) {
 
 <!-- Siistitään vielä lisaaBongaus-metodia hieman. Alkuperäisessä versiossa metodin alussa lisätään hajautustauluun bongausten lukumääräksi arvo 0, jos bongattua ei löydy. Tämän jälkeen bongausten määrä haetaan, sitä kasvatetaan yhdellä, ja vanha bongausten lukumäärä korvataan lisäämällä arvo uudestaan hajautustauluun. Osan tästäkin toiminnallisuudesta voi korvata metodilla `getOrDefault`. -->
 
-Let's make the `addSighting` method a little bit neater. In the original version, 0 is set as the value of the sighting count in the map if the given key is not found. We then get retrieve the count of the sightings, increment it by one, and the previous value of the sightings is replaced with the new one by adding the incremented count back into the map. A part of this can also be replaced with the `getOrDefault` method.
+Let's make the `addSighting` method a little bit neater. In the original version, 0 is set as the value of the sighting count in the map if the given key is not found. We then get the count of the sightings, increment it by one, and replace the previous value of the sightings with incremented count. A part of this can also be replaced with the `getOrDefault` method.
 
 
 <!-- ```java
@@ -1381,14 +1370,14 @@ public class registerSightingCounter {
 *Programming exercise:*
 
 <!-- Luo luokka `IOU`, jolla on seuraavat toiminnot: -->
-Create a class called `IOU` which has the following methods:
+Create a class called `IOUs` which has the following methods:
 
 
 <!-- - konstruktori `public IOU()` luo uuden velkakirjan -->
- - constructor `public IOU()` creates a new IOU
+ - constructor `public IOUs()` creates a new collection of IOUs.
 
 <!-- - metodi `public void setSum(String kenelle, double maara)` tallettaa velkakirjaan merkinnän lainasta tietylle henkilölle. -->
- - `public void setSum(String toWhom, double amount)` saves the amount owed and the person owed to to the IOU.
+ - `public void setSum(String toWhom, double amount)` saves the amount owed and the person owed to the IOUs.
 
 <!-- - metodi `public double howMuchDoIOweTo(String kuka)` palauttaa velan määrän annetun henkilön nimen perusteella. Jos henkilöä ei löydy, palautetaan 0. -->
  - `public double howMuchDoIOweTo(String toWhom)` returns the amount owed to the person whose name is given as a parameter. If the person
@@ -1399,12 +1388,12 @@ Create a class called `IOU` which has the following methods:
 The class can be used like this:
 
 ```java
-IOU mattsIOU = new IOU();
-mattsIOU.setSum("Arthur", 51.5);
-mattsIOU.setSum("Michael", 30);
+IOUs mattsIOUs = new IOUs();
+mattsIOUs.setSum("Arthur", 51.5);
+mattsIOUs.setSum("Michael", 30);
 
-System.out.println(mattsIOU.howMuchDoIOweTo("Arthur"));
-System.out.println(mattsIOU.howMuchDoIOweTo("Michael"));
+System.out.println(mattsIOUs.howMuchDoIOweTo("Arthur"));
+System.out.println(mattsIOUs.howMuchDoIOweTo("Michael"));
 ```
 
 <!-- Yllä oleva esimerkki tulostaisi: -->
@@ -1417,10 +1406,10 @@ The code above prints:
 </pre>
 
 <!-- Ole tarkkana tilanteessa, jossa kysytään velattoman ihmisen velkaa. -->
-Be careful in situations, when a person does not owe anything to anyone.
+Be careful in situations when a person does not owe anything to anyone.
 
 <!-- Huom! IOUn ei tarvitse huomioida vanhoja lainoja. Kun asetat uuden velan henkilölle jolla on vanha velka, vanha velka unohtuu. -->
-NB! The IOU does not care about old debt. When you set a new sum owed to a person when there is some money already owed to the same person, the old debt is forgotten.
+NB! An IOUs object does not care about old debt. When you set a new sum owed to a person when there is some money already owed to the same person, the old debt is forgotten.
 
 ```java
 IOU mattsIOU = new IOU();
