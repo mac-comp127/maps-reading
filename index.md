@@ -1,4 +1,11 @@
+
 # Map and HashMap
+
+## This is oudated / deprecated
+
+Below is the original version of the maps reading for COMP 127; it's been moved and integrated into the course site. See https://codeberg.org/pcantrell/comp127-ssg/src/branch/main/src/data/resources/maps.md for the current version, which has been cleaned up and even had a couple typos and wrong outputs fixed up.
+
+----
 
 _This reading is adapted from [Part 8.2](https://java-programming.mooc.fi/part-8/2-hash-map) of [the University of Helsinki’s online Java course](https://java-programming.mooc.fi/). Paul Cantrell added coverage of the `Map` interface; the original only discusses the `HashMap` class._
 
